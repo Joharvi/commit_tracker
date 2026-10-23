@@ -841,10 +841,16 @@ body {
   margin-bottom: 2px;
 }
 .summary-field .sf-value {
-  font-size: 0.8125rem;
-  color: var(--slds-g-color-neutral-base-10, #181818);
-  font-weight: var(--slds-g-font-weight-6, 600);
-  min-height: 18px;
+  overflow: hidden;
+  color: var(--slds-g-color-on-surface-2);
+  font-feature-settings: 'liga' off, 'clig' off;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--slds-g-font-family-base);
+  font-size: var(--slds-g-font-size-base);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
 }
 
 /* Submit footer */
