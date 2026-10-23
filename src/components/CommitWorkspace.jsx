@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import {
   IconSearch, IconClose, IconChevronDown, IconInfo, IconCalendar,
-  IconSort, IconAlert, IconCheck,
+  IconSort, IconAlert, IconCheck, IconError,
 } from './Icons'
 import contractLineOutcomeIcon from '../assets/contract_line_outcome.svg'
 import { PLACEHOLDER_ACCOUNTS, ACTIVE_WORKSPACE_STATE, calcEndDate, formatDate, formatCurrency } from '../data/commitData'
@@ -315,25 +315,25 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
           {/* Conflict banner (validation state) */}
           {showConflict && (
             <div className="conflict-banner" role="alert">
-              <button
-                className="close-btn"
-                onClick={() => setShowConflict(false)}
-                aria-label="Dismiss"
-              >
-                <IconClose size={12} />
-              </button>
-              <div className="conflict-title">
-                <IconAlert size={14} />
-                3 accounts can't be added
+              <div className="conflict-icon-text">
+                <IconError size={18} className="conflict-icon" />
+                <div className="conflict-text">
+                  <p className="conflict-title">3 accounts can't be added</p>
+                  <div className="conflict-body">
+                    <p>They're already on commit Amazon US – SFC-20261007-105641-7684, which runs Term: Oct 14, 2026 – Aug 13, 2028:</p>
+                    <ul>
+                      <li>Amazon AU</li>
+                      <li>Amazon DE</li>
+                      <li>Amazon US</li>
+                    </ul>
+                    <p>Remove them to continue, or start this commit after Aug 13, 2028. To renew, change the type to Renewal</p>
+                  </div>
+                </div>
               </div>
-              <div>They're already on commit Account Corp Inc. – SFC-20261007-105641-7684, which runs Term: Oct 14, 2026 – Aug 13, 2028:</div>
-              <ul>
-                <li>Account Corp Australia – GAA</li>
-                <li>Account Holdings – GAA 1</li>
-                <li>Account Holdings – GAA 2</li>
-              </ul>
-              <div className="conflict-hint">
-                Remove them to continue, or start this commit after Aug 13, 2028. To renew, change the commit type to Renewal.
+              <div className="conflict-close">
+                <button onClick={() => setShowConflict(false)} aria-label="Dismiss">
+                  <IconClose size={14} />
+                </button>
               </div>
             </div>
           )}

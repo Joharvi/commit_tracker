@@ -5,6 +5,8 @@
 
 :root {
   --slds-g-color-accent-container-2: #0250D9;
+  --slds-g-color-error-container-1: #fddde3;
+  --slds-g-color-on-error-1: #b60554;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -315,9 +317,7 @@ body {
 .workspace-main {
   flex: 1;
   min-width: 0;
-  min-height: 0;
   padding: var(--slds-g-spacing-4, 1rem);
-  padding-bottom: 60px;
 }
 
 /* ── Workspace form card — Figma node 948:90511 ────────────────────── */
@@ -406,7 +406,7 @@ body {
 .slds-select {
   height: 2.5rem;               /* 40px — SLDS2 standard */
   border: 1px solid var(--slds-g-color-neutral-base-80, #c9c9c9);
-  border-radius: var(--slds-g-radius-border-2, 4px);
+  border-radius: var(--slds-g-radius-border-3);
   padding: 0 var(--slds-g-spacing-4, 1rem);
   font-size: 0.8125rem;         /* 13px */
   font-family: inherit;
@@ -514,41 +514,73 @@ body {
   font-weight: var(--slds-g-font-weight-7, 700);
 }
 .conflict-banner {
-  background: #fef1ee;
-  border: 1px solid var(--slds-g-color-feedback-error, #c23934);
-  border-radius: var(--slds-g-radius-border-2, 4px);
-  padding: 10px 36px 10px 14px;
+  /* --slds-g-color-error-container-1 / error toast background */
+  background: var(--slds-g-color-error-container-1);
+  border-radius: var(--slds-g-radius-border-3);
+  padding: var(--slds-g-spacing-3, 0.75rem);
   margin-bottom: var(--slds-g-spacing-4, 1rem);
-  position: relative;
-  font-size: 13px;
+  display: flex;
+  gap: 4px;
+  margin: 16px;
+  align-items: flex-start;
+  /* Shadow/Elevation/3 */
+  box-shadow:
+    0 0 7px rgba(0,0,0,0.14),
+    0 5px 5px rgba(0,0,0,0.14),
+    0 -1px 2px rgba(0,0,0,0.08);
+}
+.conflict-banner .conflict-icon-text {
+  flex: 1;
+  display: flex;
+  gap: var(--slds-g-spacing-3, 0.75rem);
+  align-items: flex-start;
+  padding-right: var(--slds-g-spacing-3, 0.75rem);
+  min-width: 0;
+}
+.conflict-banner .conflict-icon {
+  /* --slds-g-color-on-error-1 / error foreground */
+  color: var(--slds-g-color-on-error-1);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.conflict-banner .conflict-text {
+  flex: 1;
+  min-width: 0;
+  color: var(--slds-g-color-on-error-1);
 }
 .conflict-banner .conflict-title {
-  font-weight: 700;
-  color: var(--slds-g-color-feedback-error, #c23934);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 4px;
+  font-size: var(--slds-g-font-scale-2, 1rem);
+  font-weight: 590;
+  line-height: 22px;
+  margin: 0 0 2px;
+  white-space: nowrap;
 }
-.conflict-banner ul {
-  margin: 4px 0 6px 20px;
+.conflict-banner .conflict-body {
+  font-size: var(--slds-g-font-size-base, 0.8125rem);
+  font-weight: 400;
+  line-height: 18px;
+}
+.conflict-banner .conflict-body p { margin: 0; }
+.conflict-banner .conflict-body ul {
+  list-style: disc;
+  margin: 0 0 0 19.5px;
   padding: 0;
-  color: var(--slds-g-color-brand-base-50, #0176d3);
 }
-.conflict-banner .conflict-hint {
-  color: var(--slds-g-color-feedback-error, #c23934);
-  font-size: 12px;
+.conflict-banner .conflict-body li { line-height: 18px; }
+.conflict-banner .conflict-close {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+  flex-shrink: 0;
 }
-.conflict-banner .close-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
+.conflict-banner .conflict-close button {
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--slds-g-color-neutral-base-40, #5c5c5c);
-  padding: 2px;
+  color: var(--slds-g-color-on-error-1);
+  padding: 0;
   display: flex;
+  line-height: 1;
 }
 
 /* ── Checkbox / radio ───────────────────────────────────────────────── */
@@ -627,7 +659,7 @@ body {
   align-items: center;
   gap: 8px;
   border: 1px solid var(--slds-g-color-neutral-base-80, #c9c9c9);
-  border-radius: var(--slds-g-radius-border-2, 4px);
+  border-radius: var(--slds-g-radius-border-3);
   padding: 0 12px;
   background: #fff;
   margin-bottom: var(--slds-g-spacing-3, .75rem);
@@ -652,7 +684,7 @@ body {
 /* ── Account table ───────────────────────────────────────────────────── */
 .account-table-wrap {
   border: 1px solid var(--slds-g-color-neutral-base-80, #c9c9c9);
-  border-radius: var(--slds-g-radius-border-2, 4px);
+  border-radius: var(--slds-g-radius-border-3);
   overflow-x: auto;
 }
 .account-table {
@@ -800,7 +832,7 @@ body {
 .summary-field {
   padding: var(--slds-g-spacing-1, .25rem) var(--slds-g-spacing-2, .5rem);
   border: 1px solid var(--slds-g-color-neutral-base-80, #c9c9c9);
-  border-radius: var(--slds-g-radius-border-2, 4px);
+  border-radius: var(--slds-g-radius-border-3);
   background: var(--slds-g-color-neutral-base-95, #f3f3f3);
 }
 .summary-field .sf-label {

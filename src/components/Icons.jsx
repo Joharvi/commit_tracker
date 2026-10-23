@@ -82,6 +82,15 @@ export function IconAlert({ size = 16, className = '' }) {
   )
 }
 
+export function IconError({ size = 18, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
+      <circle cx="9" cy="9" r="8" />
+      <line x1="3.5" y1="14.5" x2="14.5" y2="3.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export function IconSort({ size = 12, className = '' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.2" className={className} aria-hidden="true">
