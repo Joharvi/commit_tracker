@@ -326,12 +326,10 @@ body {
   border-radius: 16px;
   overflow: clip;            /* clips children to rounded corners */
   padding: 0;                /* sections own their padding */
+  padding-top: 16px;
 }
 .workspace-intro {
-  font-size: var(--slds-g-font-scale-neg-1, 0.75rem);
-  color: var(--slds-g-color-neutral-base-30, #444);
-  padding: var(--slds-g-spacing-4, 1rem);
-  margin: 0;
+  display: none;
 }
 
 /* ── Step sections ─────────────────────────────────────────────────── */
@@ -584,13 +582,15 @@ body {
 }
 
 /* ── Checkbox / radio ───────────────────────────────────────────────── */
-.checkbox-wrap {
+.checkbox-wrap,
+.form-field .checkbox-wrap {
   display: flex;
   align-items: center;
   gap: var(--slds-g-spacing-2, .5rem);
   cursor: pointer;
-  font-size: var(--slds-g-font-size-base, 0.8125rem);
-  font-weight: var(--slds-g-font-weight-4, 400);
+  font-size: 0.75rem;
+  font-weight: var(--slds-g-font-weight-4);
+  color: var(--slds-g-color-neutral-base-40);
 }
 .checkbox-wrap input[type="checkbox"],
 .checkbox-wrap input[type="radio"] {
