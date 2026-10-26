@@ -302,7 +302,7 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
       <div className="workspace-left-col">
         <div className="page-header-commit">
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-3, 12px)', minHeight: 51 }}>
-            <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#2e844a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#396547', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <img src={contractLineOutcomeIcon} alt="" aria-hidden="true" style={{ width: 32, height: 32, aspectRatio: '1 / 1' }} />
             </div>
             <h1 className="slds-page-header__title" style={{ fontSize: 'var(--slds-g-font-scale-5, 28px)', fontWeight: 400, color: 'var(--slds-g-color-on-surface-3, #001e5b)', margin: 0, lineHeight: '35px' }}>

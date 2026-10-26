@@ -347,7 +347,7 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--slds-g-color-palette-green-50, #2e844a);
+  background: var(--slds-g-color-palette-green-40, #22683E);
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -1013,7 +1013,7 @@ body {
 }
 .record-header-left { display: flex; align-items: center; gap: var(--slds-g-spacing-3); flex: 1; min-width: 0; }
 .record-header-titles { display: flex; flex-direction: column; min-width: 0; flex: 1; }
-.record-object-icon { width: 32px; height: 32px; flex-shrink: 0; display: block; }
+.record-object-icon { width: 32px; height: 32px; flex-shrink: 0; display: block; border-radius: 9999px; }
 .record-title {
   font-size: var(--slds-g-font-scale-5);
   font-weight: var(--slds-g-font-weight-4);
