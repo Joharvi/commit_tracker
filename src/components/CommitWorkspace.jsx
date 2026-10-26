@@ -323,11 +323,11 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
                 <div className="conflict-text">
                   <p className="conflict-title">3 accounts can't be added</p>
                   <div className="conflict-body">
-                    <p>They're already on commit Amazon US – SFC-20261007-105641-7684, which runs Term: Oct 14, 2026 – Aug 13, 2028:</p>
+                    <p>They're already on commit Account Corp – SFC-20261007-105641-7684, which runs Term: Oct 14, 2026 – Aug 13, 2028:</p>
                     <ul>
-                      <li>Amazon AU</li>
-                      <li>Amazon DE</li>
-                      <li>Amazon US</li>
+                      <li>Account Corp (Primary)</li>
+                      <li>Account Corp Inc.</li>
+                      <li>Account Holdings</li>
                     </ul>
                     <p>Remove them to continue, or start this commit after Aug 13, 2028. To renew, change the type to Renewal</p>
                   </div>
