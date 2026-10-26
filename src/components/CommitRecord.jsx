@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { IconChevronDown, IconCommitObject, IconSettings, IconPerson, IconCheck } from './Icons'
+import { IconChevronDown, IconSettings, IconPerson, IconCheck } from './Icons'
+import contractLineOutcomeIcon from '../assets/contract-line-outcome.svg'
 import { POPULATED_COMMIT } from '../data/commitData'
 import CommitCreatedModal from './CommitCreatedModal'
 import DetailsTab from './DetailsTab'
@@ -17,8 +18,8 @@ function FaqCard() {
         aria-expanded={open}
         aria-controls="faq-body"
       >
-        <h3>Salesforce Commit FAQ</h3>
         <IconChevronDown size={14} className={`chevron${open ? ' open' : ''}`} />
+        <h3>Salesforce Commit FAQ</h3>
       </button>
       <div id="faq-body" className={`sidebar-card-body${open ? '' : ' collapsed'}`}>
         <p style={{ fontSize: 12, fontWeight: 700, color: '#181818', margin: '0 0 6px' }}>Key rules</p>
@@ -138,17 +139,19 @@ function ActivityCard() {
 function RecordHeader({ commit, onEdit }) {
   return (
     <div className="record-header-bar">
-      <div className="record-breadcrumb" aria-label="Breadcrumb">Commit</div>
       <div className="record-header-row">
         <div className="record-header-left">
-          <IconCommitObject size={36} aria-hidden="true" />
-          <h1 className="record-title" id="record-title">{commit.commitName}</h1>
+          <img src={contractLineOutcomeIcon} alt="" className="record-object-icon" aria-hidden="true" />
+          <div className="record-header-titles">
+            <div className="record-breadcrumb">Commit</div>
+            <h1 className="record-title" id="record-title">{commit.commitName}</h1>
+          </div>
         </div>
         <div className="record-actions">
           <button className="btn-record-action" onClick={onEdit} aria-label="Edit this commit record">
             Edit
           </button>
-          <button className="btn-record-action" aria-label="Delete this commit record" style={{ color: '#c23934' }}>
+          <button className="btn-record-action" aria-label="Delete this commit record">
             Delete
           </button>
           <button className="btn-record-action" aria-label="Clone this commit record">
@@ -187,28 +190,29 @@ export default function CommitRecord({
       {/* Record header */}
       <RecordHeader commit={commit} onEdit={onEdit} />
 
-      {/* Tab nav */}
-      <nav className="record-tabs" aria-label="Record sections">
-        {tabs.map(tab => (
-          <button
-            key={tab}
-            className={`record-tab-btn${activeTab === tab ? ' active' : ''}`}
-            onClick={() => setActiveTab(tab)}
-            aria-selected={activeTab === tab}
-            role="tab"
-          >
-            {tab}
-          </button>
-        ))}
-      </nav>
-
       {/* Body */}
       <div className="record-body">
-        <main className="record-main" id="main-content" tabIndex={-1} ref={pageTitleRef}>
-          {activeTab === 'Related' && <RelatedTab commit={commit} populated={populated} />}
-          {activeTab === 'Details' && <DetailsTab commit={commit} />}
-          {activeTab === 'Commit Tracker' && <CommitTrackerTab commit={commit} populated={populated} />}
-        </main>
+        {/* Tab nav + content wrapped in a card */}
+        <div className="record-card">
+          <nav className="record-tabs" aria-label="Record sections">
+            {tabs.map(tab => (
+              <button
+                key={tab}
+                className={`record-tab-btn${activeTab === tab ? ' active' : ''}`}
+                onClick={() => setActiveTab(tab)}
+                aria-selected={activeTab === tab}
+                role="tab"
+              >
+                {tab}
+              </button>
+            ))}
+          </nav>
+          <main className="record-main" id="main-content" tabIndex={-1} ref={pageTitleRef}>
+            {activeTab === 'Related' && <RelatedTab commit={commit} populated={populated} />}
+            {activeTab === 'Details' && <DetailsTab commit={commit} />}
+            {activeTab === 'Commit Tracker' && <CommitTrackerTab commit={commit} populated={populated} />}
+          </main>
+        </div>
 
         <aside className="record-sidebar" aria-label="Record sidebar">
           <FaqCard />

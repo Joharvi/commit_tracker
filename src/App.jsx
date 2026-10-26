@@ -2,7 +2,47 @@ import { useState } from 'react'
 import GlobalHeader from './components/GlobalHeader'
 import CommitWorkspace from './components/CommitWorkspace'
 import CommitRecord from './components/CommitRecord'
-import { POPULATED_COMMIT } from './data/commitData'
+import { POPULATED_COMMIT, calcEndDate } from './data/commitData'
+
+function buildCommit({ customerName, commitType, totalCommitValue, termMonths, startDate, selectedIds, billId }) {
+  const now = new Date()
+  const yyyy = now.getFullYear()
+  const mm   = String(now.getMonth() + 1).padStart(2, '0')
+  const dd   = String(now.getDate()).padStart(2, '0')
+  const hh   = String(now.getHours()).padStart(2, '0')
+  const min  = String(now.getMinutes()).padStart(2, '0')
+  const ss   = String(now.getSeconds()).padStart(2, '0')
+  const rand = String(Math.floor(Math.random() * 10000)).padStart(4, '0')
+  const id   = `SFC-${yyyy}${mm}${dd}-${hh}${min}${ss}-${rand}`
+  const endDateObj = calcEndDate(startDate, termMonths)
+  const endDate    = endDateObj ? endDateObj.toISOString().slice(0, 10) : null
+  const stamp = now.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: 'numeric' })
+            + ', ' + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })
+  return {
+    id,
+    commitNumber:            'CMT-00001',
+    commitName:              `${customerName} – ${id}`,
+    account:                 customerName,
+    commitType,
+    status:                  'Draft',
+    requiresApproval:        false,
+    currency:                'USD – U.S. Dollar',
+    owner:                   'Rep One',
+    totalCommitValue:        Number(totalCommitValue),
+    discountVariancePct:     null,
+    termMonths:              Number(termMonths),
+    startDate,
+    endDate,
+    createdBy:               'Rep One',
+    createdAt:               stamp,
+    modifiedBy:              'Rep One',
+    modifiedAt:              stamp,
+    commitConsumed:          0,
+    rolloverTotal:           0,
+    participatingAccountIds: selectedIds ?? [],
+    billForShortfallId:      billId ?? null,
+  }
+}
 
 /*
   Page states:
@@ -22,12 +62,21 @@ const STATES = [
 ]
 
 export default function App() {
-  const [currentState, setCurrentState] = useState('workspace-empty')
+  const [currentState, setCurrentState]   = useState('workspace-empty')
+  const [submittedCommit, setSubmittedCommit] = useState(null)
 
   const activeStateObj = STATES.find(s => s.key === currentState)
 
-  function handleWorkspaceSubmit() {
+  // Real form submit — build a commit from actual form data
+  function handleWorkspaceSubmit(data) {
+    setSubmittedCommit(buildCommit(data))
     setCurrentState('record-just-created')
+  }
+
+  // Toggle bar — always reset to pre-populated demo data for record states
+  function handleStateChange(key) {
+    if (key.startsWith('record-')) setSubmittedCommit(null)
+    setCurrentState(key)
   }
 
   function handleEditFromRecord() {
@@ -50,7 +99,7 @@ export default function App() {
           <button
             key={s.key}
             className={currentState === s.key ? 'active' : ''}
-            onClick={() => setCurrentState(s.key)}
+            onClick={() => handleStateChange(s.key)}
             aria-pressed={currentState === s.key}
           >
             {s.label}
@@ -87,7 +136,7 @@ export default function App() {
         {currentState === 'record-just-created' && (
           <CommitRecord
             key="just-created"
-            commit={POPULATED_COMMIT}
+            commit={submittedCommit ?? POPULATED_COMMIT}
             showModal={true}
             populated={true}
             onEdit={handleEditFromRecord}
@@ -96,7 +145,7 @@ export default function App() {
         {currentState === 'record-populated' && (
           <CommitRecord
             key="populated"
-            commit={POPULATED_COMMIT}
+            commit={submittedCommit ?? POPULATED_COMMIT}
             showModal={false}
             populated={true}
             onEdit={handleEditFromRecord}

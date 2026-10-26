@@ -13,8 +13,8 @@ function CollapsibleSection({ title, children, defaultOpen = true }) {
         aria-expanded={open}
         aria-controls={id}
       >
-        <h3>{title}</h3>
         <IconChevronDown size={14} className={`chevron${open ? ' open' : ''}`} />
+        <h3>{title}</h3>
       </button>
       {open && <div id={id} className="details-grid">{children}</div>}
     </div>
@@ -25,17 +25,19 @@ function DetailField({ label, value, editable = true, isLink = false }) {
   return (
     <div className="detail-field">
       <div className="df-label">{label}</div>
-      <div className="df-value">
-        {isLink && value
-          ? <a href="#" onClick={e => e.preventDefault()}>{value}</a>
-          : value || <span style={{ color: '#dddbda' }}>—</span>
-        }
+      <div className="df-input-row">
+        <div className="df-value">
+          {isLink && value
+            ? <a href="#" onClick={e => e.preventDefault()}>{value}</a>
+            : value || <span className="df-empty">—</span>
+          }
+        </div>
+        {editable && (
+          <button className="edit-pencil" aria-label={`Edit ${label}`}>
+            <IconPencil size={13} />
+          </button>
+        )}
       </div>
-      {editable && (
-        <button className="edit-pencil" aria-label={`Edit ${label}`}>
-          <IconPencil size={13} />
-        </button>
-      )}
     </div>
   )
 }
@@ -45,8 +47,7 @@ export default function DetailsTab({ commit = POPULATED_COMMIT }) {
   const startDate = commit.startDate ? formatDate(commit.startDate) : '—'
 
   return (
-    <div>
-      {/* Commit details */}
+    <div className="details-sections">
       <CollapsibleSection title="Commit details">
         <DetailField label="Commit name" value={commit.commitName} />
         <DetailField label="Commit number" value={commit.commitNumber} editable={false} />
@@ -56,35 +57,40 @@ export default function DetailsTab({ commit = POPULATED_COMMIT }) {
         <DetailField label="Opportunity" value={commit.opportunity || null} />
         <div className="detail-field">
           <div className="df-label">Status</div>
-          <div className="df-value">
-            <span className={`status-badge ${commit.status.toLowerCase()}`}>{commit.status}</span>
+          <div className="df-input-row">
+            <div className="df-value">
+              <span className={`status-badge ${commit.status.toLowerCase()}`}>{commit.status}</span>
+            </div>
+            <button className="edit-pencil" aria-label="Edit Status">
+              <IconPencil size={13} />
+            </button>
           </div>
-          <button className="edit-pencil" aria-label="Edit Status">
-            <IconPencil size={13} />
-          </button>
         </div>
         <div className="detail-field">
           <div className="df-label">Owner</div>
-          <div className="df-value">
-            <a href="#" onClick={e => e.preventDefault()}>{commit.owner}</a>
+          <div className="df-input-row">
+            <div className="df-value">
+              <a href="#" onClick={e => e.preventDefault()}>{commit.owner}</a>
+            </div>
+            <button className="edit-pencil" aria-label="Edit Owner">
+              <IconPencil size={13} />
+            </button>
           </div>
-          <button className="edit-pencil" aria-label="Edit Owner">
-            <IconPencil size={13} />
-          </button>
         </div>
         <div className="detail-field">
           <div className="df-label">Requires approval</div>
-          <div className="df-value">
-            <input type="checkbox" checked={commit.requiresApproval} readOnly aria-label="Requires approval" />
+          <div className="df-input-row">
+            <div className="df-value">
+              <input type="checkbox" checked={commit.requiresApproval} readOnly aria-label="Requires approval" />
+            </div>
+            <button className="edit-pencil" aria-label="Edit Requires approval">
+              <IconPencil size={13} />
+            </button>
           </div>
-          <button className="edit-pencil" aria-label="Edit Requires approval">
-            <IconPencil size={13} />
-          </button>
         </div>
         <DetailField label="Currency" value={commit.currency} />
       </CollapsibleSection>
 
-      {/* Financials */}
       <CollapsibleSection title="Financials">
         <DetailField
           label="Total commit value"
@@ -93,7 +99,6 @@ export default function DetailsTab({ commit = POPULATED_COMMIT }) {
         <DetailField label="Discount variance %" value={commit.discountVariancePct} />
       </CollapsibleSection>
 
-      {/* Term & dates */}
       <CollapsibleSection title="Term & dates">
         <DetailField label="Term (months)" value={commit.termMonths ? String(commit.termMonths) : null} />
         <DetailField label="End date" value={endDate} />
@@ -101,20 +106,23 @@ export default function DetailsTab({ commit = POPULATED_COMMIT }) {
         <div className="detail-field" />
       </CollapsibleSection>
 
-      {/* System information */}
       <CollapsibleSection title="System information">
         <div className="detail-field">
           <div className="df-label">Created by</div>
-          <div className="df-value">
-            <a href="#" onClick={e => e.preventDefault()}>{commit.createdBy}</a>
-            {commit.createdAt ? `, ${commit.createdAt}` : ''}
+          <div className="df-input-row">
+            <div className="df-value">
+              <a href="#" onClick={e => e.preventDefault()}>{commit.createdBy}</a>
+              {commit.createdAt ? `, ${commit.createdAt}` : ''}
+            </div>
           </div>
         </div>
         <div className="detail-field">
           <div className="df-label">Last modified by</div>
-          <div className="df-value">
-            <a href="#" onClick={e => e.preventDefault()}>{commit.modifiedBy}</a>
-            {commit.modifiedAt ? `, ${commit.modifiedAt}` : ''}
+          <div className="df-input-row">
+            <div className="df-value">
+              <a href="#" onClick={e => e.preventDefault()}>{commit.modifiedBy}</a>
+              {commit.modifiedAt ? `, ${commit.modifiedAt}` : ''}
+            </div>
           </div>
         </div>
       </CollapsibleSection>

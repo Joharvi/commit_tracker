@@ -220,10 +220,18 @@ export function IconSetup({ size = 16, className = '' }) {
   )
 }
 
-export function IconAppsWaffle({ size = 18, className = '' }) {
+export function IconAppLauncher({ size = 20, className = '' }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 52 52" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M13 4H7a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m0 32H7a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3m0-16H7a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3M29 4h-6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m0 32h-6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3m0-16h-6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3M45 4h-6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3m0 32h-6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3m0-16h-6a3 3 0 0 0-3 3v6a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-6a3 3 0 0 0-3-3" />
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={className} aria-hidden="true">
+      <path fillRule="evenodd" clipRule="evenodd" d="M2.44217 4.88433C3.79094 4.88433 4.88433 3.79094 4.88433 2.44217C4.88433 1.09339 3.79094 0 2.44217 0C1.09339 0 0 1.09339 0 2.44217C0 3.79094 1.09339 4.88433 2.44217 4.88433Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2.44217 12.4422C3.79094 12.4422 4.88433 11.3488 4.88433 10C4.88433 8.65123 3.79094 7.55783 2.44217 7.55783C1.09339 7.55783 0 8.65123 0 10C0 11.3488 1.09339 12.4422 2.44217 12.4422Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M2.44217 20C3.79094 20 4.88433 18.9066 4.88433 17.5578C4.88433 16.2091 3.79094 15.1157 2.44217 15.1157C1.09339 15.1157 0 16.2091 0 17.5578C0 18.9066 1.09339 20 2.44217 20Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M10 4.88433C11.3488 4.88433 12.4422 3.79094 12.4422 2.44217C12.4422 1.09339 11.3488 0 10 0C8.65123 0 7.55783 1.09339 7.55783 2.44217C7.55783 3.79094 8.65123 4.88433 10 4.88433Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M10 12.4422C11.3488 12.4422 12.4422 11.3488 12.4422 10C12.4422 8.65123 11.3488 7.55783 10 7.55783C8.65123 7.55783 7.55783 8.65123 7.55783 10C7.55783 11.3488 8.65123 12.4422 10 12.4422Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M10 20C11.3488 20 12.4422 18.9066 12.4422 17.5578C12.4422 16.2091 11.3488 15.1157 10 15.1157C8.65123 15.1157 7.55783 16.2091 7.55783 17.5578C7.55783 18.9066 8.65123 20 10 20Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M17.5578 4.88433C18.9066 4.88433 20 3.79094 20 2.44217C20 1.09339 18.9066 0 17.5578 0C16.2091 0 15.1157 1.09339 15.1157 2.44217C15.1157 3.79094 16.2091 4.88433 17.5578 4.88433Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M17.5578 12.4422C18.9066 12.4422 20 11.3488 20 10C20 8.65123 18.9066 7.55783 17.5578 7.55783C16.2091 7.55783 15.1157 8.65123 15.1157 10C15.1157 11.3488 16.2091 12.4422 17.5578 12.4422Z" fill="currentColor"/>
+      <path fillRule="evenodd" clipRule="evenodd" d="M17.5578 20C18.9066 20 20 18.9066 20 17.5578C20 16.2091 18.9066 15.1157 17.5578 15.1157C16.2091 15.1157 15.1157 16.2091 15.1157 17.5578C15.1157 18.9066 16.2091 20 17.5578 20Z" fill="currentColor"/>
     </svg>
   )
 }

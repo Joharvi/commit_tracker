@@ -1,7 +1,7 @@
 import {
   IconSearch, IconChevronDown,
   IconBell, IconStar, IconPlusCircle, IconAgentAstro, IconTrailhead,
-  IconQuestion, IconSetup, IconAppsWaffle,
+  IconQuestion, IconSetup, IconAppLauncher,
 } from './Icons'
 import avatarSrc from '../assets/header-avatar.png'
 
@@ -111,7 +111,7 @@ export default function GlobalHeader({ activeNav = 'Commit Workspace' }) {
         {/* App launcher + app name */}
         <div className="sf-app-launcher">
           <button className="sf-app-launcher-btn" aria-label="App launcher">
-            <IconAppsWaffle size={18} />
+            <IconAppLauncher size={20} />
           </button>
           <span className="sf-app-name">Sales</span>
         </div>

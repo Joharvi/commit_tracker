@@ -1,4 +1,5 @@
-import { IconCommitObject, IconSort } from './Icons'
+import { IconSort } from './Icons'
+import contractLineOutcomeIcon from '../assets/contract-line-outcome.svg'
 import {
   POPULATED_COMMIT, CONTRACTS, ORDERS,
   formatCurrency, formatDate, buildDrawdownRows,
@@ -59,7 +60,7 @@ export default function CommitTrackerTab({ commit = POPULATED_COMMIT, populated 
       {/* Commit overview */}
       <div className="tracker-section">
         <div className="tracker-section-header">
-          <IconCommitObject size={22} />
+          <img src={contractLineOutcomeIcon} alt="" className="commit-overview-icon" aria-hidden="true" />
           <h2>Commit overview</h2>
         </div>
         <div className="tracker-overview-rows">

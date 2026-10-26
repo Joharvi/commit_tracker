@@ -5,6 +5,7 @@ import {
 } from './Icons'
 import contractLineOutcomeIcon from '../assets/contract_line_outcome.svg'
 import { PLACEHOLDER_ACCOUNTS, ACTIVE_WORKSPACE_STATE, calcEndDate, formatDate, formatCurrency } from '../data/commitData'
+import SelectNegotiatingAccountModal from './SelectNegotiatingAccountModal'
 
 /* ─── Deal Summary Panel ──────────────────────────────────────────────── */
 function DealSummaryPanel({ formData, selectedIds, onClose, onSubmit, submitting }) {
@@ -219,6 +220,7 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
   const [submitting, setSubmitting] = useState(false)
   const [showConflict, setShowConflict] = useState(isValidation)
   const [tcvFocused, setTcvFocused] = useState(false)
+  const [showAccountModal, setShowAccountModal] = useState(false)
 
   const endDate = calcEndDate(formData.startDate, formData.termMonths)
 
@@ -367,12 +369,14 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
                   <input
                     id="customer-name"
                     type="text"
+                    readOnly
                     className={errors.customerName ? 'error' : ''}
-                    style={{ paddingLeft: '2.25rem' }}
+                    style={{ paddingLeft: '2.25rem', cursor: 'pointer' }}
                     placeholder="Select a negotiating account"
                     value={formData.customerName}
-                    onChange={e => handleFieldChange('customerName', e.target.value)}
+                    onClick={() => setShowAccountModal(true)}
                     aria-required="true"
+                    aria-haspopup="dialog"
                     aria-describedby={errors.customerName ? 'customer-name-err' : undefined}
                     aria-invalid={!!errors.customerName}
                   />
@@ -651,6 +655,13 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
           To Do List
         </button>
       </div>
+
+      <SelectNegotiatingAccountModal
+        isOpen={showAccountModal}
+        onClose={() => setShowAccountModal(false)}
+        onSelect={name => handleFieldChange('customerName', name)}
+        currentValue={formData.customerName}
+      />
     </>
   )
 }
