@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import {
   IconSearch, IconClose, IconChevronDown, IconInfo, IconCalendar,
-  IconSort, IconAlert, IconCheck, IconError,
+  IconSort, IconAlert, IconCheck, IconError, IconDateInput, IconTrash,
 } from './Icons'
 import contractLineOutcomeIcon from '../assets/contract_line_outcome.svg'
 import { PLACEHOLDER_ACCOUNTS, ACTIVE_WORKSPACE_STATE, calcEndDate, formatDate, formatCurrency } from '../data/commitData'
@@ -222,13 +222,14 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
 
   const endDate = calcEndDate(formData.startDate, formData.termMonths)
 
-  const filteredAccounts = searchQuery.trim().length > 0
+  const q = searchQuery.trim().toLowerCase()
+  const filteredAccounts = q.length > 0
     ? PLACEHOLDER_ACCOUNTS.filter(a =>
-        a.name.toLowerCase().includes(searchQuery.toLowerCase())
+        a.name.toLowerCase().startsWith(q)
       )
     : []
 
-  const showAccountTable = searchQuery.trim().length > 0
+  const showAccountTable = q.length > 0
 
   function handleFieldChange(field, value) {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -300,7 +301,7 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
         <div className="page-header-commit">
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--slds-g-spacing-3, 12px)', minHeight: 51 }}>
             <div style={{ width: 32, height: 32, borderRadius: '50%', background: '#2e844a', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <img src={contractLineOutcomeIcon} alt="" aria-hidden="true" width="20" height="20" />
+              <img src={contractLineOutcomeIcon} alt="" aria-hidden="true" style={{ width: 32, height: 32, aspectRatio: '1 / 1' }} />
             </div>
             <h1 className="slds-page-header__title" style={{ fontSize: 'var(--slds-g-font-scale-5, 28px)', fontWeight: 400, color: 'var(--slds-g-color-on-surface-3, #001e5b)', margin: 0, lineHeight: '35px' }}>
               Commit Workspace
@@ -486,7 +487,9 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
                     aria-describedby={errors.startDate ? 'start-date-err' : undefined}
                     aria-invalid={!!errors.startDate}
                   />
-                  <span className="input-icon-right"><IconCalendar size={13} /></span>
+                  <span className="input-icon-right date-icon--active">
+                    <IconDateInput size={14} />
+                  </span>
                 </div>
                 {errors.startDate && (
                   <span className="field-error" id="start-date-err" role="alert">
@@ -513,17 +516,22 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
 
               {/* End date (auto-calculated, read-only) */}
               <div className="form-field">
-                <label htmlFor="end-date" style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--slds-g-color-neutral-base-20, #2e2e2e)' }}>
-                  End date (auto-calculated)
+                <label htmlFor="end-date" className="slds-form-element__label">
+                  End date
                 </label>
-                <input
-                  id="end-date"
-                  type="text"
-                  readOnly
-                  value={endDate ? formatDate(endDate) : ''}
-                  aria-readonly="true"
-                  aria-describedby="end-date-help"
-                />
+                <div className="input-icon-wrap icon-right">
+                  <input
+                    id="end-date"
+                    type="text"
+                    readOnly
+                    value={endDate ? formatDate(endDate) : ''}
+                    aria-readonly="true"
+                    aria-describedby="end-date-help"
+                  />
+                  <span className="input-icon-right">
+                    <IconDateInput size={14} />
+                  </span>
+                </div>
                 <span className="field-help" id="end-date-help">Start date plus term in months. Set on save.</span>
               </div>
             </div>
@@ -583,9 +591,40 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
               )
             ) : (
               <div className="empty-accounts">
-                <h3>No accounts selected</h3>
-                <p>You can add the participating accounts later, but you need at least one to activate the commit.</p>
+                <h3>
+                  {selectedIds.length >= 1
+                    ? `${selectedIds.length} account${selectedIds.length === 1 ? '' : 's'} selected`
+                    : 'No accounts selected'}
+                </h3>
+                <p>
+                  {selectedIds.length >= 1
+                    ? 'You can keep adding participating accounts later, but you need at least one to activate the commit.'
+                    : 'You can add the participating accounts later, but you need at least one to activate the commit.'}
+                </p>
               </div>
+            )}
+
+            {/* Selected accounts list */}
+            {selectedIds.length > 0 && (
+              <ul className="selected-list" role="list" aria-label="Selected accounts">
+                {PLACEHOLDER_ACCOUNTS
+                  .filter(a => selectedIds.includes(a.id))
+                  .map(a => (
+                    <li key={a.id} className="selected-list-item">
+                      <span className="selected-list-cc">
+                        {a.countryCode !== 'none' ? a.countryCode : '—'}
+                      </span>
+                      <span className="selected-list-name" title={a.name}>{a.name}</span>
+                      <button
+                        className="slds-button slds-button_icon selected-list-remove"
+                        onClick={() => handleToggleAccount(a.id)}
+                        aria-label={`Remove ${a.name}`}
+                      >
+                        <IconTrash size={14} />
+                      </button>
+                    </li>
+                  ))}
+              </ul>
             )}
           </section>
         </div>

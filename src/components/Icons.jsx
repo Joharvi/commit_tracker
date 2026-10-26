@@ -124,6 +124,26 @@ export function IconCalendar({ size = 14, className = '' }) {
   )
 }
 
+export function IconTrash({ size = 14, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
+      <line x1="2" y1="3.5" x2="12" y2="3.5" strokeLinecap="round" />
+      <path d="M5 3.5V2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1" />
+      <path d="M3 3.5l.65 7.15a.5.5 0 0 0 .5.35h5.7a.5.5 0 0 0 .5-.35L11 3.5" strokeLinecap="round" strokeLinejoin="round" />
+      <line x1="5.5" y1="6" x2="5.5" y2="9" strokeLinecap="round" />
+      <line x1="8.5" y1="6" x2="8.5" y2="9" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export function IconDateInput({ size = 14, className = '' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 520 520" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M463 197H57c-9 0-16 7-16 16v235c0 26 21 47 47 47h344c26 0 47-21 47-47V213c0-9-7-16-16-16M182 416c0 9-7 16-16 16h-31c-9 0-16-7-16-16v-31c0-9 7-16 16-16h31c9 0 16 7 16 16zm109 0c0 9-7 16-16 16h-31c-9 0-16-7-16-16v-31c0-9 7-16 16-16h31c9 0 16 7 16 16zm0-109c0 9-7 16-16 16h-31c-9 0-16-7-16-16v-31c0-9 7-16 16-16h31c9 0 16 7 16 16zm110 0c0 9-7 16-16 16h-31c-9 0-16-7-16-16v-31c0-9 7-16 16-16h31c9 0 16 7 16 16zm31-235h-39V56c0-17-14-31-31-31a31 31 0 0 0-31 31v16H190V56c0-17-14-31-31-31s-31 14-31 31v16H88a47 47 0 0 0-47 47v16c0 9 7 16 16 16h407c9 0 16-7 16-16v-16a48 48 0 0 0-48-47"/>
+    </svg>
+  )
+}
+
 export function IconDropdown({ size = 14, className = '' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" className={className} aria-hidden="true">
