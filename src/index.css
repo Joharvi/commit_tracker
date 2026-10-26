@@ -1389,7 +1389,7 @@ input:checked + .toggle-slider::before { transform: translateX(18px); }
 .related-list-card, .tracker-section, .tracker-table-section {
   background: #fff;
   border: 1px solid var(--slds-g-color-border-1);
-  border-radius: var(--slds-g-radius-border-4);
+  border-radius: 12px;
   margin-bottom: var(--slds-g-spacing-3);
   overflow: hidden;
 }
