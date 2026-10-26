@@ -1831,3 +1831,9 @@ input:checked + .toggle-slider::before { transform: translateX(18px); }
   color: var(--slds-g-color-accent-2);
   border-color: var(--slds-g-color-border-2);
 }
+.lnm-deselect {
+  border-radius: 9999px;
+  color: var(--slds-g-color-on-surface-1);
+  border-color: var(--slds-g-color-border-2);
+  margin-right: auto;
+}

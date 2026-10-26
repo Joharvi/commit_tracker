@@ -1,6 +1,13 @@
 /* Placeholder data — no real customer names, people or IDs */
 
 export const PLACEHOLDER_ACCOUNTS = [
+  { id: 'a1', name: 'Account Corp (Primary)', billForShortfall: false, globalCompany: 'Account Corp', accountNameLocal: 'none', countryCode: 'US', uduns: 'none' },
+  { id: 'a2', name: 'Account Corp Inc.', billForShortfall: true,  globalCompany: 'Account Corp', accountNameLocal: 'none', countryCode: 'US', uduns: 'none' },
+  { id: 'a3', name: 'Account Holdings', billForShortfall: false, globalCompany: 'Account Corp', accountNameLocal: 'none', countryCode: 'US', uduns: 'none' },
+  { id: 'a4', name: 'Account Holdings – GAA 1', billForShortfall: false, globalCompany: 'Account Corp', accountNameLocal: 'none', countryCode: 'US', uduns: 'none' },
+  { id: 'a5', name: 'Account Holdings – GAA 2', billForShortfall: false, globalCompany: 'Account Corp', accountNameLocal: 'none', countryCode: 'US', uduns: 'none' },
+  { id: 'a6', name: 'Account Holdings – GAA 3', billForShortfall: false, globalCompany: 'Account Corp', accountNameLocal: 'none', countryCode: 'US', uduns: 'none' },
+  { id: 'a7', name: 'Account Corp – EMEA', billForShortfall: false, globalCompany: 'Account Corp', accountNameLocal: 'none', countryCode: 'GB', uduns: 'none' },
   { id: 'acct-001', name: '3 Horizons Consulting Group', billForShortfall: false, globalCompany: 'none', accountNameLocal: 'none', countryCode: 'US', uduns: '568739081' },
   { id: 'acct-002', name: '42 Degrees North Analytics', billForShortfall: false, globalCompany: 'none', accountNameLocal: 'none', countryCode: 'MX', uduns: '501221630' },
   { id: 'acct-003', name: '8th Avenue Media Partners', billForShortfall: false, globalCompany: 'none', accountNameLocal: 'none', countryCode: 'US', uduns: 'none' },

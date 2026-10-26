@@ -40,6 +40,11 @@ export default function SelectNegotiatingAccountModal({ isOpen, onClose, onSelec
     }
   }
 
+  function handleDeselect() {
+    onSelect(null)
+    onClose()
+  }
+
   function handleBackdropClick(e) {
     if (e.target === e.currentTarget) onClose()
   }
@@ -133,6 +138,11 @@ export default function SelectNegotiatingAccountModal({ isOpen, onClose, onSelec
           </div>
 
           <footer className="lnm-footer">
+            {currentValue && (
+              <button className="slds-button slds-button_neutral lnm-deselect" onClick={handleDeselect}>
+                Deselect
+              </button>
+            )}
             <button className="slds-button slds-button_neutral lnm-cancel" onClick={onClose}>
               Cancel
             </button>
