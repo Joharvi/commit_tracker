@@ -364,14 +364,13 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
                 <label htmlFor="customer-name" className="slds-form-element__label">
                   <abbr className="slds-required" title="required">*</abbr>Customer name
                 </label>
-                <div className="input-icon-wrap">
+                <div className={`input-icon-wrap customer-name-wrap${formData.customerName ? ' has-value' : ''}`}>
                   <span className="input-icon-left"><IconSearch size={14} /></span>
                   <input
                     id="customer-name"
                     type="text"
                     readOnly
                     className={errors.customerName ? 'error' : ''}
-                    style={{ paddingLeft: '2.25rem', cursor: 'pointer' }}
                     placeholder="Select a negotiating account"
                     value={formData.customerName}
                     onClick={() => setShowAccountModal(true)}
@@ -380,6 +379,16 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
                     aria-describedby={errors.customerName ? 'customer-name-err' : undefined}
                     aria-invalid={!!errors.customerName}
                   />
+                  {formData.customerName && (
+                    <button
+                      type="button"
+                      className="customer-name-clear"
+                      onClick={() => handleFieldChange('customerName', '')}
+                      aria-label="Clear customer name"
+                    >
+                      <IconClose size={12} />
+                    </button>
+                  )}
                 </div>
                 {errors.customerName && (
                   <span className="field-error" id="customer-name-err" role="alert">
@@ -521,22 +530,22 @@ export default function CommitWorkspace({ initialState = 'empty', onSubmit }) {
               {/* End date (auto-calculated, read-only) */}
               <div className="form-field">
                 <label htmlFor="end-date" className="slds-form-element__label">
-                  End date
+                  End Date (auto-calculated)
                 </label>
                 <div className="input-icon-wrap icon-right">
                   <input
                     id="end-date"
                     type="text"
-                    readOnly
+                    disabled
                     value={endDate ? formatDate(endDate) : ''}
-                    aria-readonly="true"
+                    placeholder="Auto-calculated"
                     aria-describedby="end-date-help"
                   />
                   <span className="input-icon-right">
                     <IconDateInput size={14} />
                   </span>
                 </div>
-                <span className="field-help" id="end-date-help">Start date plus term in months. Set on save.</span>
+                <span className="field-help" id="end-date-help">Start date plus term in months. Set on save</span>
               </div>
             </div>
           </section>

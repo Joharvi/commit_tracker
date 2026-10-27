@@ -398,7 +398,7 @@ body {
 }
 
 /* ── Input / select base (SLDS2 2.5rem height) ─────────────────────── */
-.form-field input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.form-field input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not(:disabled):not([readonly]),
 .form-field select,
 .slds-input,
 .slds-select {
@@ -428,15 +428,45 @@ body {
 
 .form-field input[readonly],
 .form-field input:disabled {
-  background: var(--slds-g-color-neutral-base-90);
+  height: 2.5rem;
+  border: 1px solid var(--slds-g-color-neutral-base-90);
+  border-radius: var(--slds-g-radius-border-3);
+  font-size: 0.8125rem;
+  font-family: inherit;
   color: var(--slds-g-color-neutral-base-50);
-  border-color: var(--slds-g-color-neutral-base-90);
+  background: var(--slds-g-color-neutral-base-90);
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
   cursor: default;
 }
 
 /* ── Input with icon ───────────────────────────────────────────────── */
 .input-icon-wrap { position: relative; }
 .input-icon-wrap input { padding-left: 2.25rem; }
+
+/* ── Customer name — clear button ──────────────────────────────────── */
+.customer-name-wrap.has-value input { padding-right: 2rem; cursor: pointer; }
+.customer-name-wrap:not(.has-value) input { cursor: pointer; }
+.customer-name-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--slds-g-color-neutral-base-50);
+  border-radius: var(--slds-g-radius-border-2);
+}
+.customer-name-clear:hover { color: var(--slds-g-color-neutral-base-10); background: var(--slds-g-color-neutral-base-95); }
 .input-icon-wrap .input-icon-left {
   position: absolute;
   left: 10px;
@@ -464,7 +494,7 @@ body {
 /* Date inputs — 32px height per Figma */
 #start-date,
 #end-date {
-  height: 2rem;
+  height: 2.5rem;
   padding: 0 2rem 0 0.5rem;
 }
 
